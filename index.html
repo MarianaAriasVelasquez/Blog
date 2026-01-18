@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mariana Arias Velásquez | Innovación Cacaotera & Sostenibilidad</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+
+    <!-- Chosen Palette: Cacao & AgTech Modern -->
+    <!-- Fondo: #FDFBF7 (Crema suave / Papel) -->
+    <!-- Texto: #2D241E (Marrón Cacao Profundo) -->
+    <!-- Acentos: #4A6741 (Verde Follaje), #BC6C25 (Tierra/Cacao), #DDA15E (Trigo/Mercado) -->
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'cacao-bg': '#FDFBF7',
+                        'cacao-dark': '#2D241E',
+                        'cacao-green': '#4A6741',
+                        'cacao-earth': '#BC6C25',
+                        'cacao-sand': '#DDA15E',
+                        'cacao-soft': '#E9E4DE',
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 550px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 380px;
+            max-height: 450px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.3s; }
+
+        /* Estilo para los botones de navegación activa */
+        .nav-active {
+            color: #BC6C25;
+            border-bottom: 2px solid #BC6C25;
+        }
+    </style>
+
+    <!-- Application Structure Plan:
+         1. Hero Impactante: Presentación como líder de proyectos y puente entre mundos.
+         2. Dashboard de Capacidades: Visualización de "Superpoderes" y enfoque de Cadena de Valor.
+         3. Portafolio Interactivo: "Del Territorio al Mercado", explorando proyectos AgTech y de investigación.
+         4. Visión Estratégica: Infografía interactiva sobre el rol de "traductora".
+         RATIONALE: Se eligió esta estructura porque la audiencia de Mariana (gremios, cooperantes, academia) necesita ver resultados tangibles y capacidad técnica. El diseño es limpio y profesional pero con un toque humano y orgánico.
+    -->
+
+    <!-- Visualization & Content Choices:
+         1. Radar de Especialidades: 
+            - Goal: Comparar/Organizar.
+            - Justificación: Muestra el balance entre gestión, técnica y mercado.
+         2. Gráfico de Ciclo de Proyecto: 
+            - Goal: Informar proceso.
+            - Justificación: Demuestra el dominio de las fases (Validación -> Transferencia).
+         3. Galería de Proyectos con Filtros:
+            - Goal: Organizar.
+            - Justificación: Permite al usuario filtrar por "Tecnología", "Sostenibilidad" o "Mercados".
+    -->
+
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="bg-cacao-bg text-cacao-dark font-sans antialiased overflow-x-hidden">
+
+    <!-- Navegación -->
+    <nav class="w-full py-6 px-6 md:px-16 flex justify-between items-center fixed top-0 bg-cacao-bg/95 backdrop-blur-md z-50 border-b border-cacao-soft">
+        <div class="flex items-center space-x-2 cursor-pointer" onclick="scrollToSection('hero')">
+            <span class="text-cacao-earth font-bold text-xl">MAV.</span>
+        </div>
+        <div class="hidden md:flex space-x-10 text-xs font-bold tracking-widest uppercase">
+            <a href="#perfil" class="hover:text-cacao-earth transition">Perfil</a>
+            <a href="#proyectos" class="hover:text-cacao-earth transition">Impacto</a>
+            <a href="#contacto" class="hover:text-cacao-earth transition">Contacto</a>
+        </div>
+        <div class="md:hidden">
+            <span class="text-2xl">&#9776;</span>
+        </div>
+    </nav>
+
+    <main class="w-full max-w-7xl mx-auto pt-32 px-6 md:px-16">
+        
+        <!-- SECCIÓN 1: HERO (Identidad Profesional) -->
+        <section id="hero" class="min-h-[70vh] flex flex-col justify-center items-start mb-20 fade-in">
+            <h2 class="text-cacao-green font-bold tracking-[0.3em] uppercase text-sm mb-4">Líder de Proyectos • Investigadora</h2>
+            <h1 class="font-serif text-4xl md:text-6xl lg:text-7xl leading-tight mb-8">
+                Conectando el <span class="italic text-cacao-earth">territorio</span> con la <span class="text-cacao-green">tecnología</span> y el mercado.
+            </h1>
+            <p class="max-w-2xl text-lg md:text-xl text-gray-600 font-light leading-relaxed mb-10">
+                Soy Mariana Arias Velásquez. Transformo la investigación y la estrategia en acciones que generan impacto real en la vida de los productores de cacao colombiano.
+            </p>
+            <div class="flex space-x-4">
+                <button onclick="scrollToSection('proyectos')" class="bg-cacao-dark text-white px-8 py-4 rounded-full text-sm font-bold hover:bg-cacao-earth transition shadow-lg">
+                    Ver Proyectos AgTech
+                </button>
+                <button onclick="scrollToSection('perfil')" class="border border-cacao-dark px-8 py-4 rounded-full text-sm font-bold hover:bg-cacao-soft transition">
+                    Mi Metodología
+                </button>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: DASHBOARD DE CAPACIDADES (Data Viz) -->
+        <section id="perfil" class="py-24 border-t border-cacao-soft fade-in stagger-1">
+            <div class="mb-16">
+                <h3 class="font-serif text-3xl md:text-4xl mb-4 italic text-cacao-earth text-center lg:text-left">Ecosistema de Competencias</h3>
+                <p class="text-gray-600 max-w-2xl font-light text-center lg:text-left">
+                    Mi enfoque no es unidimensional. Integro variables comerciales, sociales y técnicas para asegurar que la innovación sea adoptable y rentable.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <!-- Gráfico de Radar -->
+                <div class="flex flex-col items-center">
+                    <div class="chart-container">
+                        <canvas id="skillsChart"></canvas>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-6 tracking-widest uppercase">Mapa de Especialidades (Visión 360°)</p>
+                </div>
+
+                <!-- Lista de Superpoderes Interactiva -->
+                <div class="space-y-6">
+                    <div class="p-6 bg-white border border-cacao-soft rounded-xl shadow-sm hover:shadow-md transition cursor-pointer" onclick="updateSkillView(0)">
+                        <h4 class="font-bold text-cacao-green mb-2">01. Gestión de Proyectos AgTech</h4>
+                        <p class="text-sm text-gray-500 font-light">Desde la validación hasta la transferencia tecnológica. Orden, seguimiento y resultados.</p>
+                    </div>
+                    <div class="p-6 bg-white border border-cacao-soft rounded-xl shadow-sm hover:shadow-md transition cursor-pointer" onclick="updateSkillView(1)">
+                        <h4 class="font-bold text-cacao-earth mb-2">02. Inteligencia de Mercados</h4>
+                        <p class="text-sm text-gray-500 font-light">Análisis de variables comerciales para exportación y diferenciación de cacao especial.</p>
+                    </div>
+                    <div class="p-6 bg-white border border-cacao-soft rounded-xl shadow-sm hover:shadow-md transition cursor-pointer" onclick="updateSkillView(2)">
+                        <h4 class="font-bold text-cacao-sand mb-2">03. Sostenibilidad Aplicada</h4>
+                        <p class="text-sm text-gray-500 font-light">Estrategias con métricas reales, enfocadas en resiliencia y bienestar del productor.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: PROYECTOS (Interactividad) -->
+        <section id="proyectos" class="py-24 fade-in stagger-2">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+                <div class="max-w-xl">
+                    <h3 class="font-serif text-4xl mb-4">Proyectos & Investigación</h3>
+                    <p class="text-gray-600 font-light">Experiencia liderando iniciativas que tecnifican el agro y fortalecen la cadena de valor.</p>
+                </div>
+                <div class="mt-6 md:mt-0 flex space-x-2">
+                    <button class="filter-btn active px-4 py-2 text-xs font-bold uppercase tracking-tighter rounded-md bg-cacao-dark text-white" onclick="filterProjects('all', this)">Todos</button>
+                    <button class="filter-btn px-4 py-2 text-xs font-bold uppercase tracking-tighter rounded-md bg-cacao-soft hover:bg-cacao-sand" onclick="filterProjects('agtech', this)">AgTech</button>
+                    <button class="filter-btn px-4 py-2 text-xs font-bold uppercase tracking-tighter rounded-md bg-cacao-soft hover:bg-cacao-sand" onclick="filterProjects('mercado', this)">Mercados</button>
+                </div>
+            </div>
+
+            <!-- Grid de Proyectos -->
+            <div id="project-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Contenido generado por JS -->
+            </div>
+        </section>
+
+        <!-- SECCIÓN 4: LA TRADUCTORA (Concepto) -->
+        <section class="py-24 bg-cacao-dark text-white rounded-3xl p-12 mb-24 flex flex-col lg:flex-row items-center gap-12 overflow-hidden">
+            <div class="lg:w-1/2">
+                <h3 class="font-serif text-4xl mb-6 italic">La Traductora entre Mundos</h3>
+                <p class="text-cacao-sand text-lg mb-8 font-light italic">"Llevo lo técnico a decisiones, y la estrategia al territorio."</p>
+                <div class="space-y-4">
+                    <div class="flex items-start space-x-4">
+                        <span class="text-cacao-green font-bold">01.</span>
+                        <p class="text-sm font-light">Traduzco las necesidades del <strong class="text-cacao-sand">Territorio</strong> para que la tecnología sea útil.</p>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <span class="text-cacao-green font-bold">02.</span>
+                        <p class="text-sm font-light">Traduzco la <strong class="text-cacao-sand">Investigación</strong> en estrategias de negocio competitivas.</p>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <span class="text-cacao-green font-bold">03.</span>
+                        <p class="text-sm font-light">Traduzco las exigencias del <strong class="text-cacao-sand">Mercado</strong> en planes de sostenibilidad real.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="lg:w-1/2 flex justify-center">
+                <div class="chart-container bg-white/5 rounded-2xl p-4">
+                    <canvas id="impactChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER / CONTACTO -->
+    <footer id="contacto" class="bg-cacao-soft py-20">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h3 class="font-serif text-4xl mb-8">¿Conectamos por el cacao colombiano?</h3>
+            <p class="text-gray-600 mb-12 font-light">Busco organizaciones que apuesten por la trazabilidad, la sostenibilidad y el impacto social real.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12 text-left">
+                <div class="bg-white p-6 rounded-2xl">
+                    <p class="text-xs uppercase font-bold text-gray-400 mb-2">Correo</p>
+                    <p class="text-cacao-dark font-bold">mariasv.22@gmail.com</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl">
+                    <p class="text-xs uppercase font-bold text-gray-400 mb-2">Ubicación</p>
+                    <p class="text-cacao-dark font-bold">Medellín, Colombia (Global)</p>
+                </div>
+            </div>
+
+            <div class="flex justify-center space-x-8 text-sm font-bold tracking-widest uppercase text-cacao-earth">
+                <a href="https://www.linkedin.com/in/mariana-arias-velasquez-44a582133" class="hover:underline">LinkedIn</a>
+                <a href="#" class="hover:underline">Portafolio PDF</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- LOGIC -->
+    <script>
+        // --- 1. State ---
+        const appState = {
+            projects: [
+                { id: 1, title: 'Cacao Risk', category: 'agtech', desc: 'Gestión de riesgos y tecnificación para productores de cacao.', impact: 'Gestión AgTech' },
+                { id: 2, title: 'AgroRisk / MR Risk', category: 'agtech', desc: 'Sistemas de información para la productividad del agro.', impact: 'Tecnología' },
+                { id: 3, title: 'Inteligencia de Mercados Cacao', category: 'mercado', desc: 'Investigación aplicada para exportación de cacaos especiales.', impact: 'Comercial' },
+                { id: 4, title: 'Avoscan & Biocontroladores', category: 'agtech', desc: 'Acompañamiento en validación y alistamiento tecnológico.', impact: 'Validación' },
+                { id: 5, title: 'Estrategia Sostenible EAFIT', category: 'mercado', desc: 'Liderazgo en transferencia de conocimiento y nuevos negocios.', impact: 'Estrategia' },
+                { id: 6, title: 'Sostenibilidad Cacaotera', category: 'mercado', desc: 'Análisis de variables sociales y ambientales en la cadena.', impact: 'Sostenibilidad' }
+            ]
+        };
+
+        // --- 2. Charts (Chart.js) ---
+        function initCharts() {
+            // Skill Radar Chart
+            const ctxSkills = document.getElementById('skillsChart').getContext('2d');
+            new Chart(ctxSkills, {
+                type: 'radar',
+                data: {
+                    labels: ['Gestión Proyectos', 'Sostenibilidad', 'Tecnología (AgTech)', 'Mercados/Export.', 'Investigación', 'Relacionamiento'],
+                    datasets: [{
+                        label: 'Nivel de Especialidad',
+                        data: [95, 88, 85, 90, 92, 95],
+                        backgroundColor: 'rgba(74, 103, 65, 0.2)',
+                        borderColor: '#4A6741',
+                        pointBackgroundColor: '#BC6C25',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: { display: false },
+                            grid: { color: '#E9E4DE' },
+                            pointLabels: { font: { size: 10, weight: 'bold' }, color: '#2D241E' }
+                        }
+                    },
+                    plugins: { legend: { display: false } }
+                }
+            });
+
+            // Impact Bar Chart (Fases de Proyecto)
+            const ctxImpact = document.getElementById('impactChart').getContext('2d');
+            new Chart(ctxImpact, {
+                type: 'bar',
+                data: {
+                    labels: ['Validación', 'Alistamiento', 'Ejecución', 'Cierre', 'Transferencia'],
+                    datasets: [{
+                        label: 'Dominio de Fase (%)',
+                        data: [90, 95, 100, 95, 85],
+                        backgroundColor: ['#DDA15E', '#BC6C25', '#4A6741', '#BC6C25', '#DDA15E'],
+                        borderRadius: 10
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { 
+                        legend: { display: false },
+                        tooltip: { backgroundColor: '#2D241E' }
+                    },
+                    scales: {
+                        x: { display: false, grid: { display: false } },
+                        y: { 
+                            grid: { display: false },
+                            ticks: { color: '#FDFBF7', font: { weight: 'bold' } }
+                        }
+                    }
+                }
+            });
+        }
+
+        // --- 3. Interactive Functions ---
+
+        function renderProjects(filter = 'all') {
+            const grid = document.getElementById('project-grid');
+            const filtered = filter === 'all' ? appState.projects : appState.projects.filter(p => p.category === filter);
+            
+            grid.innerHTML = filtered.map(p => `
+                <div class="bg-white p-8 rounded-3xl border border-cacao-soft hover:shadow-xl transition-all duration-500 group">
+                    <div class="flex justify-between items-start mb-6">
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-cacao-earth bg-cacao-soft px-3 py-1 rounded-full">${p.impact}</span>
+                        <span class="text-2xl group-hover:translate-x-2 transition-transform duration-300">→</span>
+                    </div>
+                    <h4 class="font-serif text-2xl mb-3 text-cacao-dark">${p.title}</h4>
+                    <p class="text-sm text-gray-500 font-light leading-relaxed">${p.desc}</p>
+                </div>
+            `).join('');
+        }
+
+        function filterProjects(category, btn) {
+            // UI Toggle
+            document.querySelectorAll('.filter-btn').forEach(b => {
+                b.classList.remove('bg-cacao-dark', 'text-white');
+                b.classList.add('bg-cacao-soft');
+            });
+            btn.classList.add('bg-cacao-dark', 'text-white');
+            btn.classList.remove('bg-cacao-soft');
+
+            // Logic
+            renderProjects(category);
+        }
+
+        function updateSkillView(index) {
+            // Podríamos expandir esto para mostrar detalles específicos por competencia
+            console.log("Visualizando competencia:", index);
+        }
+
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Init
+        window.onload = () => {
+            initCharts();
+            renderProjects();
+        };
+    </script>
+</body>
+</html>
